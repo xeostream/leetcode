@@ -23,8 +23,7 @@ public class Solution17 {
 	
 	public int maxAreaInRow(int[] height) {
 		Stack<Integer> stack = new Stack<Integer>();
-		int i = 0;
-		int area = 0;
+		int i = 0, area = 0;
 		while (i < height.length) {
 			if (stack.isEmpty() || height[stack.peek()] <= height[i])
 				stack.push(i++);
