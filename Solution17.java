@@ -9,14 +9,10 @@ public class Solution17 {
 		int m = matrix.length;
 		int n = m == 0 ? 0 : matrix[0].length;
 		int[][] heights = new int[m][n+1];
-		for (int i = 0; i < m; i++) {
-			for (int j = 0; j < n; j++) {
-				if (matrix[i][j] == '0')
-					heights[i][j] = 0;
-				else
+		for (int i = 0; i < m; i++)
+			for (int j = 0; j < n; j++)
+				if (matrix[i][j] == '1')
 					heights[i][j] = i == 0 ? 1 : heights[i-1][j]+1;
-			}
-		}
 		for (int i = 0; i < m; i++) {
 			int temp = maxAreaInRow(heights[i]);
 			if (temp > area)
