@@ -17,17 +17,17 @@ public class Solution26 {
 	public ListNode swapPairs(ListNode head) {
 		if (head != null && head.next != null) {
 			ListNode node = head;
-			ListNode next = head.next;
 			ListNode result = head.next;
-			while (node != null && next != null) {
-				ListNode pre = next.next;
-				node.next = pre;
-				next.next = node;
-				node = pre;
-				if (node == null)
-					break;
-				next = pre.next;
+			ListNode n = head.next.next;
+			result.next = node;
+			while (n != null && n.next != null) {
+				ListNode pre = n.next.next;
+				node.next = n.next;
+				node.next.next = n;
+				node = n;
+				n = pre;
 			}
+			node.next = n == null ? null : n;
 			return result;
 		}
 		return head;
@@ -39,6 +39,7 @@ public class Solution26 {
 		head.next = new ListNode(2);
 		head.next.next = new ListNode(3);
 		head.next.next.next = new ListNode(4);
+		head.next.next.next.next = new ListNode(5);
 		head = s26.swapPairs(head);
 		while (head != null) {
 			System.out.println(head.val);
