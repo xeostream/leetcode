@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Set;
 
 /*
  * Clone Graph
@@ -19,18 +21,29 @@ public class Solution34 {
 	}
 	
 	public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+		if (node == null) return null;
 		UndirectedGraphNode head = null;
-		HashMap<Integer, Boolean> map = new HashMap<Integer, Boolean>();
+		HashMap<Integer, UndirectedGraphNode> map = new HashMap<Integer, UndirectedGraphNode>();
 		Queue<UndirectedGraphNode> queue = new LinkedList<UndirectedGraphNode>();
+		Set<Integer> log = new HashSet<Integer>();
 		queue.offer(node);
 		while (queue.size() > 0) {
-			head = new UndirectedGraphNode(queue.poll().label);
-			for (UndirectedGraphNode n : head.neighbors)
-				if (!map.containsKey(n.label))
+			UndirectedGraphNode temp = queue.poll();
+			head = map.containsKey(temp.label) ? map.get(temp.label) : new UndirectedGraphNode(temp.label);
+			for (UndirectedGraphNode n : temp.neighbors) {
+				if (!map.containsKey(n.label)) {
+					UndirectedGraphNode pre = new UndirectedGraphNode(n.label);
+					map.put(n.label, pre);
+				}
+				if (!log.contains(n.label)) {
 					queue.offer(n);
+					log.add(n.label);
+				}
+				head.neighbors.add(map.get(n.label));
+			}
 			if (!map.containsKey(head.label))
-				map.put(head.label, true);
+				map.put(head.label, head);
 		}
-		return head;
+		return map.get(node.label);
 	}
 }
