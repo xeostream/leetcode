@@ -17,6 +17,7 @@ public class Solution36 {
     public int sumNumbers(TreeNode root) {
         int sum = 0;
         if (root != null) {
+	    if (root.left == null && root.right == null) return root.val;
             String s = "" + root.val;
             sum = strToNumber(s, root.left) + strToNumber(s, root.right);
         }
