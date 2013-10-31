@@ -13,7 +13,7 @@ public class Solution37 {
 		for (int i : num)
 			set.add(i);
 		for (int i : num)
-			if (set.contains(i))
+			if (set.contains(i) && set.size() > length)
 				length = Math.max(length, longestConsecutive(set, i));
 		return length;
 	}
