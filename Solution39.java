@@ -26,6 +26,7 @@ public class Solution39 {
 		record.add(start);
 		char[] temp = start.toCharArray();
 		for (int i = 0; i < start.length(); i++) {
+			char c = temp[i];
 			for (char j = 'a'; j <= 'z'; j++) {
 				if (temp[i] == j) continue;
 				temp[i] = j;
@@ -43,6 +44,7 @@ public class Solution39 {
 					record.add(str);
 					findLadders(list, str, end, dict);
 				}
+				temp[i] = c;
 			}
 		}
 		return result;
@@ -52,6 +54,7 @@ public class Solution39 {
 			HashSet<String> dict) {
 		char[] temp = start.toCharArray();
 		for (int i = 0; i < temp.length; i++) {
+			char j = temp[i];
 			for (char c = 'a'; c <= 'z'; c++) {
 				if (temp[i] == c) continue;
 				temp[i] = c;
@@ -59,13 +62,16 @@ public class Solution39 {
 				if (str.equals(end)) {
 					list.add(end);
 					result.add(list);
+					return ;
 				} else if (dict.contains(str) && !record.contains(str)) {
 					ArrayList<String> tem = new ArrayList<String>();
 					for (String s : list)
 						tem.add(s);
 					tem.add(str);
+					record.add(str);
 					findLadders(tem, str, end, dict);
 				}
+				temp[i] = j;
 			}
 		}
 	}
@@ -81,7 +87,7 @@ public class Solution39 {
 		ArrayList<ArrayList<String>> result = s39.findLadders("hit", "cog", dict);
 		for (ArrayList<String> str : result) {
 			for (String s : str)
-				System.out.println(s + " ");
+				System.out.print(s + " ");
 			System.out.println();
 		}
 	}
