@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /*
  * Reorder List
  * Given a singly linked list L: L0¡úL1¡ú¡­¡úLn-1¡úLn
@@ -12,7 +14,30 @@ public class Solution42 {
 			next = null;
 		}
 	}
-	
+	public void reorderList(ListNode head) {
+		if (head == null || head.next == null || head.next.next == null) return ;
+		ArrayList<ListNode> record = new ArrayList<ListNode>();
+		ListNode cur = head;
+		while (cur != null) {
+			record.add(cur);
+			cur = cur.next;
+		}
+		int len = record.size();
+		int i =0, j = len - 1;
+		while (i != j && j-i != 1) {
+			record.get(i).next = record.get(j);
+			record.get(j).next = record.get(i+1);
+			i++;
+			j--;
+		}
+		if (i == j)
+			record.get(i).next = null;
+		else {
+			record.get(i).next = record.get(j);
+			record.get(j).next = null;
+		}
+	}
+	/*same val node runtime error
 	public void reorderList(ListNode head) {
 		if (head == null || head.next == null || head.next.next == null) return ;
 		ListNode node = null;
@@ -31,7 +56,7 @@ public class Solution42 {
 			curNode = temp;
 		}
 		cur = head;
-		while (cur != node && cur.next != node) {
+		while (cur.val != node.val && cur.next.val != node.val) {
 			ListNode temp1 = cur.next;
 			ListNode temp2 = node.next;
 			cur.next = node;
@@ -45,7 +70,7 @@ public class Solution42 {
 			cur.next = node;
 			cur.next.next = null;
 		}
-	}
+	}*/
 	
 	public static void main(String ...args) {
 		Solution42 s42 = new Solution42();
