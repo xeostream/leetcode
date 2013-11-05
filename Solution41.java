@@ -14,7 +14,7 @@ public class Solution41 {
 	public int maxPathSum(TreeNode root) {
         // Start typing your Java solution below
         // DO NOT write main() function
-        int max[] = new int[1]; // this is used to keep max val
+        int max[] = new int[1];
         max[0] = Integer.MIN_VALUE;
         localSum(root, max);
         return max[0];       
