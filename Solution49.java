@@ -19,23 +19,17 @@ public class Solution {
 			ArrayList<Integer> one = new ArrayList<Integer>();
 			one.add(1);
 			result.add(one);
-			if (numRows > 1) {
-				ArrayList<Integer> two = new ArrayList<Integer>();
-				two.add(1);
-				two.add(1);
-				result.add(two);
-				if (numRows > 2) {
-					ArrayList<Integer> prev = two;
-					for (int i = 2; i < numRows; i++) {
-						ArrayList<Integer> next = new ArrayList<Integer>();
-						next.add(1);
-						for (int j = 0; j < prev.size() - 1; j++)
-							next.add(prev.get(j) + prev.get(j + 1));
-						next.add(1);
-						result.add(next);
-						prev = next;
-					}
+			for (int i = 1; i < numRows; i++) {
+				ArrayList<Integer> next = new ArrayList<Integer>();
+				ArrayList<Integer> prev = result.get(result.size() - 1);
+				for (int j = 0; j < prev.size(); j++) {
+					int num = prev.get(j);
+					if (j > 0)
+						num += prev.get(j - 1);
+					next.add(num);
 				}
+				next.add(1);
+				result.add(next);
 			}
 		}
 		return result;
