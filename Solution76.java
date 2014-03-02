@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 
-public class Solution {
+public class Solution76 {
     public ArrayList<ArrayList<Integer>> subsetsWithDup(int[] num) {
     	Arrays.sort(num);
         ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
