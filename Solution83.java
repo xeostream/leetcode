@@ -1,4 +1,4 @@
-public class Solution {
+public class Solution83 {
 	public int largestRectangleArea(int[] height) {
         int max = 0;
         for (int i = 1; i < height.length; i++) {
