@@ -1,23 +1,26 @@
+/**
+ * Larget Rectangle in Histogram
+ * Given n non-negaive integers representing the histogram's bar height where the width of each bar is 1, find the area of largest rectangle in the histogram.
+ */
 public class Solution83 {
 	public int largestRectangleArea(int[] height) {
-        int max = 0;
-        for (int i = 1; i < height.length; i++) {
-        	if (height[max] < height[i]) {
-        		max = i;
-        	}
-        }
-        int[] maxArea = new int[1];
-        largestRectangleArea(height, max-1, max, height[max], maxArea);
-        largestRectangleArea(height, max, max+1, height[max], maxArea);
-        return maxArea[0];
-    }
-
-    public void largestRectangleArea(int[] height, int begin, int end, int currentHeight, int[] maxArea) {
-    	if (begin < 0 || end >= height.length) return ;
-    	int min = Math.min(height[begin], height[end]);
-    	min = Math.min(min, currentHeight);
-    	maxArea[0] = Math.max(maxArea[0], min*(end-begin+1));
-    	largestRectangleArea(height, begin-1, end, min, maxArea);
-    	largestRectangleArea(height, begin, end+1, min, maxArea);
-    }
+		int area = 0;
+		Stack<Integer> stack = new Stack<Integer>();
+		for (int i = 0; i < height.length; i++) {
+			if (stack.isEmpty() || stack.peek() < height[i]) {
+				stack.push(i);
+			} else {
+				int start = stack.pop();
+				int length = stack.isEmpty() ? i : (i - stack.peek() - 1);
+				area = Math.max(area, height[start]*length);
+				i--;
+			}
+		}
+		while (!stack.isEmpty()) {
+			int start = stack.pop();
+			int length = stack.isEmpty() ? height.length : (height - stack.peek() - 1);
+			area = Math.max(area, height[start]*length);
+		}
+		return area;
+	}
 }
