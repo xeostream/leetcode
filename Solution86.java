@@ -1,4 +1,5 @@
 public class Solution86 {
+    //Solution I
     public int removeDuplicates(int[] A) {
         if (null == A) return 0;
         if (A.length < 2) return A.length;
@@ -10,18 +11,18 @@ public class Solution86 {
             }
         }
         A[num++] = temp;
-        /*Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-        for (int i : A) {
-            if (!map.containsKey(i)) {
-                cnt++;
-                map.put(i, 1);
-            } else if (map.get(i) == 1) {
-                cnt++;
-                map.put(i, 2);
-            }
-        }*/
-
         return num;
+    }
+    //Solution II
+    public int remvoeDuplicates(int[] A) {
+        int len = A.length;
+        if (len < 2) return len;
+        int index = 2;
+        for (int i = 2; i < len; i++) {
+            if (A[i] != A[i-2])
+                A[index++] = A[i];
+        }
+        return index;
     }
     public static void main(String ...args) {
         Solution86 s = new Solution86();
