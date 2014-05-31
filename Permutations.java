@@ -5,7 +5,7 @@ For example, [1,2,3] have the following permutations: [1,2,3], [1,3,2], [2,1,3],
 */
 
 public class Solution {
-	public ArrayList<ArrayList<Integer>> permute(int[] num) {
+	public List<List<Integer>> permute(int[] num) {
 		// Start typing your Java solution below // DO NOT write main() function
 		ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
 		ArrayList<Integer> tmp = new ArrayList<Integer>();
