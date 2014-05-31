@@ -4,6 +4,7 @@ Note: The numbers can be arbitrarily large and are non-negative.
 */
 public class Solution {
 	public String multiply(String num1, String num2) {
+		if ("0".equals(num1) || "0".equals(num2)) return "0";
 		int len1 = num1.length(), len2 = num2.length();
 		int[] tmp = new int[len1+len2];
 		for (int i = len2-1; i >= 0; i--) {
