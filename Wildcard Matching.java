@@ -16,29 +16,28 @@ isMatch("aab", "c*a*b") → false
 
 public class Solution {
 	public boolean isMatch(String s, String p) {
-		if (s.length() != p.length() && p.indexOf("*") < 0) return false;
 		int i = 0, j = 0;
-		while (i < s.length() && j < p.length()) {
-			if (p.charAt(j) == '?' || p.charAt(j) == s.charAt(i)) {
+		int star_s = Integer.MIN_VALUE, star_p = Integer.MIN_VALUE;
+		while (i < s.length()) {
+			if (j < p.length() && (p.charAt(j) == '?' || s.charAt(i) == p.charAt(j))) {
 				i++;
 				j++;
-			} else if (p.charAt(j) == '*') {
-				while (j < p.length() && p.charAt(j) == '*') {
+			} else if (j < p.length() && p.charAt(j) == '*') {
+				while (j < p.length() && p.charAt(j) == '*')
 					j++;
-				}
-				if (j == p.length()) return true;
-				while (i < s.length() && s.charAt(i) != p.charAt(j)) {
-					i++;
-				}
-				if (i == s.length()) return false;
+				if (j == p.length())
+					return true;
+				star_p = j;
+				star_s = i;
+			} else if (star_p != Integer.MIN_VALUE && (j < p.length() || i < s.length())) {
+				i = ++star_s;
+				j = star_p;
 			} else {
 				return false;
 			}
 		}
-		if (i == s.length() && j == p.length()) {
-			return true;
-		} else {
-			return false;
-		}
+		while (j < p.length() && p.charAt(j) == '*')
+			j++;
+		return j == p.length();
 	}
 }
